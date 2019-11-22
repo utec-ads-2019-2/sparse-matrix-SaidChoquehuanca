@@ -56,6 +56,7 @@ public:
     }
 
     void set(unsigned fil, unsigned col, T number){
+        // Estás creando muchos nodos, y no estás borrando ninguno
         auto newNode = new Node<T>();
         auto **dirx = new Node<T>*;
         dirx = nullptr;
@@ -115,10 +116,14 @@ public:
             if(row_temp->pos_Y == col) return row_temp->number;
             row_temp = row_temp->down;
         }
+
+        // Aquí se va a generar un warning
     }
     T operator()(unsigned fil, unsigned col) const{
         return  get(fil,col);
     };
+
+    // El no usar directamente los punteros afecta el performance
 
     Matrix<T> operator*(T scalar) const{
         Matrix<T> matriz(this->rows, this->columns);
